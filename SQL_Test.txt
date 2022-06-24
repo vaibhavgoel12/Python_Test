@@ -1,0 +1,98 @@
+1. How many organisations in total?
+Query -
+select count(distinct id) from test.public.organisations;
+
+Query Run Time - 34 ms
+
+2. How many organisations do not have offer_requests?
+Query - 
+select count(distinct o.id)  from organisations o 
+left join offer_requests r 
+on o.id=r.organisation_id 
+where r.organisation_id is null;
+
+Query Run Time - 47 ms
+
+3. How many organisations have offer_requests?
+Query - 
+select count(distinct o.id)  from organisations o 
+left join offer_requests r 
+on o.id=r.organisation_id 
+where r.organisation_id is not null;
+
+Query Run Time - 161 ms
+
+4. How many organisations have no offers?
+Query - 
+select count(distinct o.id)  from organisations o 
+left join offer_requests r 
+on o.id=r.organisation_id 
+where r.organisation_id is not null;
+
+Query Run Time - 47 ms
+
+5. Which organisation has maximum offers and how many offers?
+Query - 
+select count(r.organisation_id) as cnt,o.id,o.org_name from organisations o 
+inner join offers r 
+on o.id=r.organisation_id
+group by o.id,o.org_name
+order by cnt desc 
+limit 1;
+
+Query Run Time - 166 ms
+
+6. Which organisation has minimum offers and how many offers?
+Query - 
+select count(r.organisation_id) as cnt,o.id,o.org_name from organisations o 
+inner join offers r 
+on o.id=r.organisation_id
+group by o.id,o.org_name
+order by cnt asc
+limit 1;
+
+Query Run Time - 158 ms
+
+7. Which organisation has maximum orders and how many orders?
+Query - 
+select count(r.organisation_id) as cnt,o.id,o.org_name from organisations o 
+inner join orders r 
+on o.id=r.organisation_id
+group by o.id,o.org_name
+order by cnt desc
+limit 1;
+
+Query Run Time - 47 ms
+
+8. Which organisation has minimum orders and how many orders?
+Query - 
+select count(r.organisation_id) as cnt,o.id,o.org_name from organisations o 
+inner join orders r 
+on o.id=r.organisation_id
+group by o.id,o.org_name
+order by cnt asc
+limit 1;
+
+Query Run Time - 27 ms
+
+9. Which organisation has the maximum total amount of offers and what is the amount?
+Query - 
+select sum(r.total_amount) as amt,o.id,o.org_name from organisations o 
+inner join offers r 
+on o.id=r.organisation_id
+group by o.id,o.org_name
+order by amt desc
+limit 1;
+
+Query Run Time - 167 ms
+
+10. Which organisation has the maximum total amount of orders and what is the amount?
+Query - 
+select sum(r.total_amount) as amt,o.id,o.org_name from organisations o 
+inner join orders r 
+on o.id=r.organisation_id
+group by o.id,o.org_name
+order by amt desc
+limit 1;
+ 
+Query Run Time - 27 ms
