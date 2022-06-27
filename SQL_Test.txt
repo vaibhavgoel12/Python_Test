@@ -2,6 +2,7 @@
 Query -
 select count(distinct id) from test.public.organisations;
 
+Result - 100
 Query Run Time - 34 ms
 
 2. How many organisations do not have offer_requests?
@@ -11,6 +12,7 @@ left join offer_requests r
 on o.id=r.organisation_id 
 where r.organisation_id is null;
 
+Result - 0
 Query Run Time - 47 ms
 
 3. How many organisations have offer_requests?
@@ -20,6 +22,7 @@ left join offer_requests r
 on o.id=r.organisation_id 
 where r.organisation_id is not null;
 
+Result - 100
 Query Run Time - 161 ms
 
 4. How many organisations have no offers?
@@ -29,6 +32,7 @@ left join offer_requests r
 on o.id=r.organisation_id 
 where r.organisation_id is not null;
 
+Result - 100
 Query Run Time - 47 ms
 
 5. Which organisation has maximum offers and how many offers?
@@ -39,6 +43,10 @@ on o.id=r.organisation_id
 group by o.id,o.org_name
 order by cnt desc 
 limit 1;
+
+Result - 
+cnt     id                          org_name
+10915	org_00000000000WR10DFx1nc6	moaning_turquoise
 
 Query Run Time - 166 ms
 
@@ -51,6 +59,10 @@ group by o.id,o.org_name
 order by cnt asc
 limit 1;
 
+Result - 
+cnt id                          org_name
+420	org_00000000000WR10DFzIaeZ	native_lime
+
 Query Run Time - 158 ms
 
 7. Which organisation has maximum orders and how many orders?
@@ -61,6 +73,10 @@ on o.id=r.organisation_id
 group by o.id,o.org_name
 order by cnt desc
 limit 1;
+
+Result - 
+cnt id                          org_name
+32	org_00000000000WR10DFx1nc8	dual_sapphire
 
 Query Run Time - 47 ms
 
@@ -73,6 +89,10 @@ group by o.id,o.org_name
 order by cnt asc
 limit 1;
 
+Result - 
+cnt id                          org_name
+1	org_00000000000WR10DFyAC8N	adverse_red
+
 Query Run Time - 27 ms
 
 9. Which organisation has the maximum total amount of offers and what is the amount?
@@ -84,6 +104,10 @@ group by o.id,o.org_name
 order by amt desc
 limit 1;
 
+Result - 
+amt         id                          org_name
+324947704	org_00000000000WR10DFx1nc6	moaning_turquoise
+
 Query Run Time - 167 ms
 
 10. Which organisation has the maximum total amount of orders and what is the amount?
@@ -94,5 +118,9 @@ on o.id=r.organisation_id
 group by o.id,o.org_name
 order by amt desc
 limit 1;
+ 
+Result - 
+amt     id                          org_name
+1123713	org_00000000000WR10DFx1nc8	dual_sapphire 
  
 Query Run Time - 27 ms
